@@ -1,20 +1,21 @@
 <script lang="ts">
     export let text = '';
-    export let index: number;
 
-    function removeMe(i: number): number {
-        return i
-    }
 </script>
 
 <li class="todo">
     {text}
-    <button class="btn" on:click={() => removeMe(index)}>x</button>
 </li>
 
 <style>
     .todo {
-        display: flex;
+        word-wrap: break-word;
+        color: black;
+        border-radius: 5px;
+        width: 100%;
+        min-height: 15px;
+        text-align: left;
+        padding: 3px 3px 3px 5px;
     }
 
 </style>

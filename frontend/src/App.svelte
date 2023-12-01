@@ -1,25 +1,33 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
   import {AddTodo} from '../wailsjs/go/main/App.js'
   import Todos from './Todos.svelte';
 
-  let allTodos: string[] = ["Hello", "World", "!"]
+  // let allTodos: string[] = ["Hello", "World", "!"]
+  let inputRef = null
+  let allTodos: string[] = []
   let newTodo: string = ''
-  
+
+
   function addTodo(): void {
     
     AddTodo(newTodo).then(result => allTodos = result)
     newTodo = ''
+    inputRef.focus()
   }
 </script>
 
 <main>
   <h1>Wails Todo APP</h1>
   <div class="input-box" id="input">
-    <input autocomplete="off" bind:value={newTodo} class="input" id="newTodo" type="text"/>
+    <input autocomplete="off" bind:this={inputRef} bind:value={newTodo} class="input" id="newTodo" type="text"/>
     <button class="btn" on:click={addTodo}>+</button>
   </div>
-  
-  <Todos todos={allTodos} />
+  {#if allTodos.length === 0}
+    <p>Add some todos =)</p>
+  {:else}
+    <Todos todos={allTodos} />
+  {/if}
 </main>
 
 <style>
